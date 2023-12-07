@@ -1,22 +1,23 @@
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Control, Controller, useWatch } from "react-hook-form";
 import { INPUTSIZE } from "../textInput";
 
-interface Option {
+interface IOption {
   label: string;
   value: string | boolean;
 }
 
-interface DropdownProps {
+interface IDropdown {
   label: string;
   name: string;
-  options: Option[];
+  options: IOption[];
   className?: string;
   size?: "sm" | "md" | "lg";
   labelClassName?: string;
+  placeholder?: string;
   required?: boolean;
   control: Control;
   multiple?: boolean;
@@ -29,6 +30,7 @@ function DropdownComponent({
   labelClassName = "",
   size = "sm",
   required = true,
+  placeholder,
   error,
   control,
   onChange,
@@ -90,7 +92,11 @@ function DropdownComponent({
                   )
                 ) : (
                   <span className='block truncate'>
-                    {currentSelectedValue?.label || "Select One"}
+                    {currentSelectedValue?.label || (
+                      <span className='text-gray-400'>
+                        {placeholder || "Select one"}
+                      </span>
+                    )}
                   </span>
                 )}
                 <span className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
@@ -116,13 +122,13 @@ function DropdownComponent({
                   >
                     Select One
                   </Listbox.Option>
-                  {options.map((option: Option, i: number) => (
+                  {options.map((option: IOption, i: number) => (
                     <Listbox.Option
                       key={i}
                       className={({ active }) =>
                         clsx(
                           active
-                            ? "text-white bg-primary-400"
+                            ? "text-primary-500 bg-neutral-100"
                             : "text-gray-900",
                           "cursor-default select-none relative py-2 pl-3 pr-9"
                         )
@@ -184,17 +190,20 @@ function DropdownComponent({
   );
 }
 
-export default function Dropdown({
-  label,
-  name,
-  className = "",
-  labelClassName = "",
-  size = "md",
-  required = true,
-  options,
-  multiple = false,
-  control,
-}: DropdownProps) {
+export const Dropdown: React.FC<IDropdown> = (props: IDropdown) => {
+  const {
+    label,
+    name,
+    className = "",
+    labelClassName = "",
+    size = "md",
+    required = true,
+    placeholder,
+    options,
+    multiple = false,
+    control,
+  } = props;
+
   return (
     <Controller
       name={name}
@@ -207,6 +216,7 @@ export default function Dropdown({
               control={control}
               onChange={onChange}
               name={name}
+              placeholder={placeholder}
               error={errors}
               required={required}
               options={options}
@@ -221,4 +231,4 @@ export default function Dropdown({
       }}
     />
   );
-}
+};

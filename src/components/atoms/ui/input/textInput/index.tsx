@@ -1,10 +1,10 @@
-import { HTMLInputTypeAttribute } from "react";
+import React, { HTMLInputTypeAttribute } from "react";
 import { Path } from "react-hook-form";
 import clsx from "clsx";
-import { camalize } from "../../../../utils";
+import { camalize } from "../../../../../utils";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
-type InputProps = {
+interface IInput {
   type?: HTMLInputTypeAttribute | "textArea" | "search";
   label?: Path<any>;
   name: string;
@@ -12,25 +12,27 @@ type InputProps = {
   inputClassName?: string;
   labelClassName?: string;
   register: any;
-  required: boolean;
+  required?: boolean;
   error?: string | undefined;
   [key: string]: any;
-};
+}
 
 export const INPUTSIZE = { sm: "px-3 py-2", md: "px-3 py-4", lg: "px-3 py-8" };
 
-export function Input({
-  type = "text",
-  label = "",
-  name,
-  size = "sm",
-  inputClassName = "",
-  labelClassName = "",
-  register,
-  required = true,
-  error,
-  ...rest
-}: InputProps) {
+export const Input: React.FC<IInput> = (props: IInput) => {
+  const {
+    type = "text",
+    label = "",
+    name,
+    size = "md",
+    inputClassName = "",
+    labelClassName = "",
+    register,
+    required = true,
+    error,
+    ...args
+  } = props;
+
   const labelId = camalize(label);
   const errorClass = error
     ? "border-red-500 focus:border-red-800 bg-red-50"
@@ -78,7 +80,7 @@ export function Input({
               errorClass
             )}
             {...register(name, { required: required })}
-            {...rest}
+            {...args}
             autoComplete='off'
           />
           <div className='text-red-500 text-xs my-2 px-1'>{error}</div>
@@ -97,7 +99,7 @@ export function Input({
               errorClass
             )}
             {...register(name, { required: required })}
-            {...rest}
+            {...args}
             autoComplete='off'
           />
           <div className='text-red-500 text-xs my-2 px-1'>{error}</div>
@@ -105,4 +107,4 @@ export function Input({
       )}
     </div>
   );
-}
+};

@@ -1,3 +1,4 @@
-export * from "./ui/input/textInput"
-export * from "./ui/input/dropdown"
-export * from "./ui/table"
+export * from "./atoms";
+export * from "./molecules";
+export * from "./organisms";
+export * from "./templetes";

@@ -15,9 +15,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-color: var(--gray-300);
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
+  /* border-bottom-style: solid;
+  border-bottom-width: 0px; */
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
@@ -27,24 +26,22 @@
 .navItem {
   list-style: none;
   font-weight: 500;
-  border-color: #34d399;
   border-bottom-style: solid;
   border-bottom-width: 3px;
   height: 33px;
   margin-top: 20px;
+  margin-left: 30px;
   cursor: pointer;
   display: flex;
   gap: 4px;
 }
 
 .navIcon {
-  color:   #34d399;
   height: 20px;
   width: 20px;
 }
 
 .navText {
   padding-top: 2px;
-  color: #34d399;
 }
 

@@ -9,15 +9,13 @@ import {
 } from "@tanstack/react-table";
 import * as React from "react";
 
-export function Table({
-  data,
-  columns,
-  noDataMessage,
-}: {
+interface ITable {
   data: any[];
   columns: ColumnDef<any, any>[];
   noDataMessage?: string | null;
-}) {
+}
+
+export const Table = ({ data, columns, noDataMessage }: ITable) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
@@ -36,11 +34,14 @@ export function Table({
     getPaginationRowModel: getPaginationRowModel(),
   });
   return (
-    <div className="border-b-[3px] border-neutral-100 pb-7">
+    <div className='border-b-[3px] border-neutral-100 pb-7'>
       <table className='min-w-full'>
         <thead className='bg-white '>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="border-y-[3px] border-x  border-neutral-100">
+            <tr
+              key={headerGroup.id}
+              className='border-y-[3px] border-x  border-neutral-100'
+            >
               {headerGroup.headers.map((header) => (
                 <th
                   scope='col'
@@ -118,4 +119,4 @@ export function Table({
       </table>
     </div>
   );
-}
+};
