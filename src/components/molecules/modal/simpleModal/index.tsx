@@ -61,7 +61,7 @@ export const SimpleModal: React.FC<ISimpleModal> = (props: ISimpleModal) => {
           >
             <div
               className={clsx(
-                "inline-block transform  rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl sm:align-middle",
+                "inline-block transform  rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 w-full sm:max-w-3xl sm:align-middle",
                 className
               )}
             >
@@ -72,7 +72,7 @@ export const SimpleModal: React.FC<ISimpleModal> = (props: ISimpleModal) => {
                   </h3>
                 </div>
               )}
-              <div className='px-5'>{children} </div>
+              <div className='px-5 h-auto overflow-y-auto'>{children} </div>
             </div>
           </Transition.Child>
         </div>

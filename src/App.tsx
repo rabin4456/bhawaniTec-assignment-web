@@ -15,16 +15,22 @@ function App() {
     //Registering modal in the dom
     GlobalModal.setUpModal(globalModalRef);
   }, []);
-  
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={routes} />
         <ToastContainer
-          position='top-right'
-          autoClose={3000}
-          hideProgressBar={true}
+          autoClose={2000}
           newestOnTop={true}
+          hideProgressBar={true}
+          closeButton={false}
+          position='top-right'
+          style={{
+            top: "5rem",
+            zIndex: 999999999,
+            width: 400,
+          }}
         />
         <ModalWrapper ref={(el) => (globalModalRef = el)} />
       </QueryClientProvider>

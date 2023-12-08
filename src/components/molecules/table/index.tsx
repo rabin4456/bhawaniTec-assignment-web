@@ -10,12 +10,20 @@ import {
 import * as React from "react";
 
 interface ITable {
-  data: any[];
+  data: any;
   columns: ColumnDef<any, any>[];
   noDataMessage?: string | null;
+  showAddButton?: boolean;
+  buttonAction?:()=>void
 }
 
-export const Table = ({ data, columns, noDataMessage }: ITable) => {
+export const Table = ({
+  data,
+  columns,
+  noDataMessage,
+  showAddButton = false,
+  buttonAction
+}: ITable) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
   const table = useReactTable({
@@ -66,12 +74,8 @@ export const Table = ({ data, columns, noDataMessage }: ITable) => {
                         header.getContext()
                       )}
                       {{
-                        // asc: <ArrowUpIcon width={15} />,
-                        // desc: <ArrowDownIcon width={15} />,
                       }[header.column.getIsSorted() as string] ?? null}
-                      {/* {!header.column.getIsSorted() && (
-                        <ChevronUpDownIcon width={15} />
-                      )} */}
+                     
                     </div>
                   )}
                   {header.column.getCanResize() && (
@@ -92,7 +96,7 @@ export const Table = ({ data, columns, noDataMessage }: ITable) => {
           {noDataMessage ? (
             <tr>
               <td
-                className='p-4 font-semibold text-center'
+                className='p-4 font-semibold text-center text-red-500'
                 colSpan={columns.length}
               >
                 {noDataMessage}
@@ -117,6 +121,11 @@ export const Table = ({ data, columns, noDataMessage }: ITable) => {
           )}
         </tbody>
       </table>
+      {showAddButton &&
+      <button className="text-gray-500 text-sm underline pt-7 pl-5" onClick={buttonAction}>
+        Add code / product
+      </button>
+      }
     </div>
   );
 };

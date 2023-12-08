@@ -10,7 +10,7 @@ const DebitNote = () => {
     props,
     headingTitle = "New debit note",
   }: {
-    props?: Record<any, any>;
+    props?: any;
     headingTitle?: string;
   }) => {
     GlobalModal.open({
@@ -30,7 +30,7 @@ const DebitNote = () => {
   };
 
   useEffect(() => {
-    openDebitNoteModal({});
+    openDebitNoteModal({ props: { onSuccess:()=> navigate("/home") } });
   }, []);
   return <></>;
 };

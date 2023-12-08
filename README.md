@@ -1,3 +1,3 @@
 how to run project ?
--> yarn dev
-
+-> yarn        //installs packages
+-> yarn dev    //runs server
